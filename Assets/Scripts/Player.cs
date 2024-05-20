@@ -9,8 +9,14 @@ public class Player : MonoBehaviour
     private float speed = 6f;
     private Vector2 currentVelocity;
     private Animator animator;
+    [SerializeField]
+    private AudioClip deathAudio;
 
-    void Start() => this.animator = GetComponent<Animator>();
+    void Start()
+    {
+        this.animator = GetComponent<Animator>();
+        this.transform.position = new Vector3(0f, -2f, 0f);
+    }
 
     void Update()
     {
@@ -72,6 +78,8 @@ public class Player : MonoBehaviour
         if (collider.CompareTag("Mob"))
         {
             Destroy(this.gameObject);
+            GameManager.Instance.GameOver();
+            AudioManager.Instance.Play(deathAudio);
         }
     }
 }

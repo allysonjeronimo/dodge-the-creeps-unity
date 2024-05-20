@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  deathAudio: {fileID: 8300000, guid: 75995a9fe118bde4bb0a0a3778d86006, type: 3}
 --- !u!114 &6520449383200940742
 MonoBehaviour:
   m_ObjectHideFlags: 0
