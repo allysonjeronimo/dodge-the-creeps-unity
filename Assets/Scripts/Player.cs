@@ -10,10 +10,7 @@ public class Player : MonoBehaviour
     private Vector2 currentVelocity;
     private Animator animator;
 
-    void Start()
-    {
-        this.animator = GetComponent<Animator>();
-    }
+    void Start() => this.animator = GetComponent<Animator>();
 
     void Update()
     {
@@ -68,5 +65,13 @@ public class Player : MonoBehaviour
 
         this.transform.localScale = new Vector3(scaleX, scaleY, this.transform.localScale.z);
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Mob"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
