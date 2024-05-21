@@ -12,6 +12,11 @@ public class Boundaries : MonoBehaviour
 
     void Awake()
     {
+        /**
+         * Obtem as dimensões da tela em World Point a partir do Screen Size.
+         * O que corresponde a metade, já que em World Point a origem da tela é o centro.
+         * Ex: Uma tela de 8x6un -> 4x3
+         * */
         this.screenBounds = Camera.main.ScreenToWorldPoint(
             new Vector3(
                 Screen.width, 

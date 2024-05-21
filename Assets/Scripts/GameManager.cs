@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         Invoke("StartTimers", startTimer);
         UIManager.Instance.UpdateScore(this.score);
         UIManager.Instance.ShowMessage("Get Ready!", true);
+        AudioManager.Instance.PlayMusic("Theme");
     }
 
     private void StartTimers()
@@ -51,17 +52,19 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         MobSpawner.Instance.StopSpawn();
-        StopCoroutine(CountScore());
         isCountingScore = false;
+        StopCoroutine(CountScore());
         UIManager.Instance.ShowGameOver();
     }
 
     IEnumerator CountScore()
     {
+        yield return new WaitForSeconds(scoreTimer);
+
         while (isCountingScore){
-            yield return new WaitForSeconds(scoreTimer);
             this.score += 1;
             UIManager.Instance.UpdateScore(this.score);
+            yield return new WaitForSeconds(scoreTimer);
         }
     }
 

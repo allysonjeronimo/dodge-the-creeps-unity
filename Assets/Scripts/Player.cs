@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
     private float speed = 6f;
     private Vector2 currentVelocity;
     private Animator animator;
-    [SerializeField]
-    private AudioClip deathAudio;
 
     void Start()
     {
@@ -79,7 +77,8 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
             GameManager.Instance.GameOver();
-            AudioManager.Instance.Play(deathAudio);
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlaySoundEffect("GameOver");
         }
     }
 }

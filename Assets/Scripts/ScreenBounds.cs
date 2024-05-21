@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Requer componente Boundaries
+ **/
 public class ScreenBounds : MonoBehaviour
 {
     private Vector2 screenBounds;
@@ -10,25 +13,11 @@ public class ScreenBounds : MonoBehaviour
 
     void Start()
     {
-        /**
-         * Obtem as dimensões da tela em World Point a partir do Screen Size.
-         * O que corresponde a metade, já que em World Point a origem da tela é o centro.
-         * Ex: Uma tela de 8x6un -> 4x3
-         * */
-        this.screenBounds = Camera.main.ScreenToWorldPoint(
-            new Vector3(
-                Screen.width,
-                Screen.height,
-                Camera.main.transform.position.z
-                )
-            );
-
-        SpriteRenderer renderer = this.GetComponent<SpriteRenderer>();
-
-        if(renderer != null)
+        if (TryGetComponent<Boundaries>(out var boundaries))
         {
-            halfWidth = renderer.bounds.size.x / 2f;
-            halfHeight = renderer.bounds.size.y / 2f;
+            screenBounds = boundaries.ScreenBounds;
+            halfWidth = boundaries.Size.x / 2f;
+            halfHeight = boundaries.Size.y / 2f;
         }
     }
 

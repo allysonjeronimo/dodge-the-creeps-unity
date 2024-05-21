@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DestroyOutsideScreen : MonoBehaviour
 {
-
     private Vector2 screenBounds;
     private float halfWidth;
     private float halfHeight;
@@ -13,17 +12,12 @@ public class DestroyOutsideScreen : MonoBehaviour
 
     private void Start()
     {
-        this.screenBounds = Camera.main.ScreenToWorldPoint(
-            new Vector3(
-                Screen.width,
-                Screen.height,
-                Camera.main.transform.position.z
-                )
-            );
-
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-        halfWidth = renderer != null ? renderer.bounds.size.x / 2f : 0f;
-        halfHeight = renderer != null ? renderer.bounds.size.y / 2f : 0f;
+        if(TryGetComponent<Boundaries>(out var boundaries))
+        {
+            screenBounds = boundaries.ScreenBounds;
+            halfWidth = boundaries.Size.x / 2f;
+            halfHeight = boundaries.Size.y / 2f;
+        }
     }
 
     

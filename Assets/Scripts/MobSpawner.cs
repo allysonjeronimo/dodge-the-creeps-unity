@@ -27,20 +27,6 @@ public class MobSpawner : MonoBehaviour
     private Boundaries boundaries;
     private bool isSpawing;
 
-    private struct SpawnSide
-    {
-        public Vector2 vector1;
-        public Vector2 vector2;
-        public float rotation;
-
-        public SpawnSide(Vector2 vector1, Vector2 vector2, float rotation)
-        {
-            this.vector1 = vector1;
-            this.vector2 = vector2;
-            this.rotation = rotation;
-        }
-    }
-
     private const string TOP = "TOP";
     private const string RIGHT = "RIGHT";
     private const string BOTTOM = "BOTTOM";
