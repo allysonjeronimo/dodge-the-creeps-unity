@@ -107,8 +107,8 @@ public class MobSpawner : MonoBehaviour
             );
 
         Vector2 position = new Vector2(
-            Random.Range(screenSide.vector1.x, screenSide.vector2.x),
-            Random.Range(screenSide.vector1.y, screenSide.vector2.y)
+            Random.Range(screenSide.startPoint.x, screenSide.endPoint.x),
+            Random.Range(screenSide.startPoint.y, screenSide.endPoint.y)
             );
 
         Instantiate(mobPrefab, position, rotation);
