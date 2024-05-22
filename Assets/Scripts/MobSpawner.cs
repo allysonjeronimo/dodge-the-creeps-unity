@@ -27,12 +27,7 @@ public class MobSpawner : MonoBehaviour
     private Boundaries boundaries;
     private bool isSpawing;
 
-    private const string TOP = "TOP";
-    private const string RIGHT = "RIGHT";
-    private const string BOTTOM = "BOTTOM";
-    private const string LEFT = "LEFT";
-    private Dictionary<string, SpawnSide> spawnSides = new Dictionary<string, SpawnSide>();
-    private string[] spawnSideNames = { TOP, RIGHT, BOTTOM, LEFT };
+    private SpawnSide[] spawnSides = new SpawnSide[4];
     private const float RANDOM_ANGLE_RANGE = 45f;
 
     private void Awake()
@@ -48,34 +43,34 @@ public class MobSpawner : MonoBehaviour
 
     private void InitScreenSides()
     {
-        spawnSides.Add(
-            TOP, new SpawnSide(
+        spawnSides[0] = new SpawnSide(
+                    SpawnSide.TOP,
                     new Vector2(-this.boundaries.ScreenBounds.x, this.boundaries.ScreenBounds.y),
                      new Vector2(this.boundaries.ScreenBounds.x, this.boundaries.ScreenBounds.y),
                     -90f
-                )
-            );
-        spawnSides.Add(
-            RIGHT, new SpawnSide(
+                );
+
+        spawnSides[1] = new SpawnSide(
+                    SpawnSide.RIGHT,
                     new Vector2(this.boundaries.ScreenBounds.x, this.boundaries.ScreenBounds.y),
                     new Vector2(this.boundaries.ScreenBounds.x, -this.boundaries.ScreenBounds.y),
                     -180f
-                )
-            );
-        spawnSides.Add(
-            BOTTOM, new SpawnSide(
+                );
+
+        spawnSides[2] = new SpawnSide(
+                    SpawnSide.BOTTOM,
                     new Vector2(this.boundaries.ScreenBounds.x, -this.boundaries.ScreenBounds.y),
                     new Vector2(-this.boundaries.ScreenBounds.x, -this.boundaries.ScreenBounds.y),
                     90f
-                )
-            );
-        spawnSides.Add(
-           LEFT, new SpawnSide(
-                   new Vector2(-this.boundaries.ScreenBounds.x, -this.boundaries.ScreenBounds.y),
+                );
+
+
+        spawnSides[3] = new SpawnSide(
+                   SpawnSide.LEFT,
+                    new Vector2(-this.boundaries.ScreenBounds.x, -this.boundaries.ScreenBounds.y),
                     new Vector2(-this.boundaries.ScreenBounds.x, this.boundaries.ScreenBounds.y),
                    0f
-               )
-           );
+               );
     }
 
     public void StartSpawn()
@@ -103,8 +98,7 @@ public class MobSpawner : MonoBehaviour
 
     private void InstantiateMob()
     {
-        string randomSideName = spawnSideNames[Random.Range(0, spawnSideNames.Length)];
-        SpawnSide screenSide = spawnSides[randomSideName];
+        SpawnSide screenSide = spawnSides[Random.Range(0, spawnSides.Length)];
 
         Quaternion rotation = Quaternion.Euler(
                 0f, 
